@@ -34,7 +34,7 @@ func (s Line) ToItem(ctx context.Context, repository WarehouseRepository) ([]*It
 	output := []*Item{}
 	for itemId := range s {
 		if item, err := repository.GetProductBy(ctx, itemId); err != nil {
-			errOut = fmt.Errorf("converting line to item: %w", err)
+			errOut = errors.Join(errOut, fmt.Errorf("converting line to item: %w", err))
 		} else if errOut == nil {
 			output = append(output, item)
 		}

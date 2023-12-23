@@ -4,6 +4,7 @@ import (
 	"choreography/internal/services/warehouse/events"
 	"choreography/tools"
 	"context"
+	"errors"
 	"fmt"
 
 	"github.com/google/uuid"
@@ -62,12 +63,12 @@ func (o *Invoice) RestoreItems(ctx context.Context, repository WarehouseReposito
 	for itemId, qty := range o.items {
 		product, err := repository.GetProductBy(ctx, itemId)
 		if err != nil {
-			errOut = fmt.Errorf("error on get product: %w", err)
+			errOut = errors.Join(errOut, fmt.Errorf("error on get product: %w", err))
 			continue
 		}
 		product.IncreaseBy(Quantity(qty))
 		if err := repository.UpdateProduct(ctx, *product); err != nil {
-			errOut = fmt.Errorf("error on update product: %w", err)
+			errOut = errors.Join(errOut, fmt.Errorf("error on update product: %w", err))
 		}
 	}
 	return errOut
