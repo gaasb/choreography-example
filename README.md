@@ -1,9 +1,10 @@
+![picture-1](https://github.com/gaasb/choreography-example/assets/45713515/0ee87109-2e62-47dc-abe4-c7f6f88be009)
 # Example of Choreography Saga pattern
 >"this is just my implementation of the distributed transaction pattern."
 
 ### Requirement
 ```text
-golang 1.21
+golang 1.21+
 Docker
 ```
 
