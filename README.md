@@ -4,7 +4,7 @@
 
 ### Requirement
 ```text
-golang 1.21
+golang 1.21+
 Docker
 ```
 
